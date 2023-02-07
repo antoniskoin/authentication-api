@@ -1,5 +1,5 @@
 import pymongo
-from flask import Flask, request
+from flask import Flask, request, redirect
 from werkzeug.security import generate_password_hash, check_password_hash
 from waitress import serve
 from helpers.account import insert_user, delete_user, check_email
@@ -17,6 +17,11 @@ if not result:
 else:
     print("Database checks completed!")
     database = client.get_database("authentication")
+
+
+@app.route("/")
+def index():
+    return redirect("https://github.com/antoniskoin/authentication-api")
 
 
 @app.route("/register", methods=["POST"])
